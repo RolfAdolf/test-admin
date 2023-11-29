@@ -3,6 +3,8 @@ FROM python:3.8-slim-buster
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
+RUN apt-get update && apt-get install -y netcat
+
 RUN apt-get update \
   # dependencies for building Python packages
   && apt-get install -y build-essential \
@@ -15,7 +17,7 @@ RUN apt-get update \
 #  && apt-get install -y python-pygraphviz libgraphviz-dev \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && rm -rf /var/lib/apt/lists/* && apt-get install -y netcat
+  && rm -rf /var/lib/apt/lists/*
 
 ENV HOME /test_admin/
 
