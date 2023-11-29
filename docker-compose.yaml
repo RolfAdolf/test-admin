@@ -1,0 +1,39 @@
+version: '3.3'
+
+
+volumes:
+  test_amis_db_data: # ai_teacher_local_redis_data:
+
+
+networks:
+  proxynet:
+    name: 'shared_network'
+
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - test_amis_db_data:/var/lib/postgresql/data
+    env_file:
+      - .envs/.db
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile
+    entrypoint: /entrypoint
+    volumes:
+      - ./src:/test_admin
+    ports:
+      - "8888:8888"
+    depends_on:
+      - db
+    env_file:
+      - .envs/.db
+      - .envs/.app
+    command: /start
+    networks:
+      - proxynet

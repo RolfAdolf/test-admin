@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+echo "HERE"
+ls
+pwd
+
+# Migrations
+alembic upgrade head
+
+# Start app
+uvicorn app:app --reload --host $HOST --port $PORT --workers 2
