@@ -8,4 +8,4 @@ asyncpg==0.29.0
 uvicorn==0.15.0
 alembic==1.12.1
 greenlet==3.0.1
-sqladmin[full]
+sqladmin[full]==0.16.0

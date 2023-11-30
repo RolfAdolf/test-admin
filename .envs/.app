@@ -1,3 +1,3 @@
-HOST=127.0.0.1
-PORT=8888
+HOST=localhost
+PORT=8086
 DATABASE=postgres
